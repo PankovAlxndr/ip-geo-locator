@@ -1,5 +1,10 @@
 # Учебный проект для понимания паттернов Декоратор\Заместитель
 
+[![Build Status](https://scrutinizer-ci.com/g/PankovAlxndr/ip-geo-locator/badges/build.png?b=main)](https://scrutinizer-ci.com/g/PankovAlxndr/ip-geo-locator/build-status/main)
+[![Code Coverage](https://scrutinizer-ci.com/g/PankovAlxndr/ip-geo-locator/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/PankovAlxndr/ip-geo-locator/?branch=main)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/PankovAlxndr/ip-geo-locator/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/PankovAlxndr/ip-geo-locator/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/PankovAlxndr/ip-geo-locator/?branch=main)
+
 В данном случае написана библиотека, которая определяет местоположение по ip-адресу.
 Добавлена возможность писать свои ["локаторы"](example%2FDaDataLocator.php) и использовать их совместно с поставляемыми, чтобы, например, кешировать результат или логировать ошибки.
 
