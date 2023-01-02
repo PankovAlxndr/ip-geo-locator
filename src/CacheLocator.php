@@ -19,22 +19,21 @@ class CacheLocator implements LocatorInterface
         $this->cachePrefix = $cachePrefix;
     }
 
-    /**
-     * @psalm-suppress MixedAssignment, MixedReturnStatement, MixedInferredReturnType
-     */
     public function locate(Ip $ip): ?Location
     {
         // это уже не просто декоратор, а заместитель, так как мы перехватываем вызов
         // к оригинальному методу и что-то делаем, в данном случае оригинальный метод вообще
         // может не быть вызван
         $key = $this->cachePrefix . $ip->getValue();
+        /** @psalm-var mixed $location */
         $location = $this->cache->get($key);
-
         if ($location === null) {
             $location = $this->next->locate($ip);
             $this->cache->set($key, $location);
+            return $location;
+        } elseif ($location instanceof Location) {
+            return $location;
         }
-
-        return $location;
+        return null;
     }
 }
