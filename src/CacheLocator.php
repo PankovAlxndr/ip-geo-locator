@@ -25,7 +25,7 @@ class CacheLocator implements LocatorInterface
     public function locate(Ip $ip): ?Location
     {
         // это уже не просто декоратор, а заместитель, так как мы перехватываем вызов
-        // к оригинальному методу и что-то делаем, в данном случае оригинальный методы вообще
+        // к оригинальному методу и что-то делаем, в данном случае оригинальный метод вообще
         // может не быть вызван
         $key = $this->cachePrefix . $ip->getValue();
         $location = $this->cache->get($key);
