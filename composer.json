@@ -23,7 +23,9 @@
   },
   "scripts": {
     "test": "phpunit --colors=always",
-    "test-coverage": "XDEBUG_MODE=coverage phpunit --colors=always --coverage-html var/coverage"
+    "test-coverage": "XDEBUG_MODE=coverage phpunit --colors=always --coverage-html var/coverage",
+    "phpcs": "phpcs --standard=phpcs.xml",
+    "phpcbf": "phpcbf"
   },
   "require": {
     "psr/simple-cache": "^3.0",
