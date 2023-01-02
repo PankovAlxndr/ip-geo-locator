@@ -10,11 +10,13 @@ class CacheLocator implements LocatorInterface
 {
     private LocatorInterface $next;
     private CacheInterface $cache;
+    private string $cachePrefix;
 
-    public function __construct(LocatorInterface $next, CacheInterface $cache)
+    public function __construct(LocatorInterface $next, CacheInterface $cache, ?string $cachePrefix = 'location-')
     {
         $this->next = $next;
         $this->cache = $cache;
+        $this->cachePrefix = $cachePrefix;
     }
 
     /**
@@ -25,7 +27,7 @@ class CacheLocator implements LocatorInterface
         // это уже не просто декоратор, а заместитель, так как мы перехватываем вызов
         // к оригинальному методу и что-то делаем, в данном случае оригинальный методы вообще
         // может не быть вызван
-        $key = 'location-' . $ip->getValue();
+        $key = $this->cachePrefix . $ip->getValue();
         $location = $this->cache->get($key);
 
         if ($location === null) {
