@@ -6,8 +6,10 @@ namespace IpGeoLocator;
 
 class ChainLocator implements LocatorInterface
 {
+    /** @var LocatorInterface[] */
     private array $locators;
 
+    /** @param array<int, LocatorInterface> $locators */
     public function __construct(...$locators)
     {
         $this->locators = $locators;

@@ -17,6 +17,9 @@ class CacheLocator implements LocatorInterface
         $this->cache = $cache;
     }
 
+    /**
+     * @psalm-suppress MixedAssignment, MixedReturnStatement, MixedInferredReturnType
+     */
     public function locate(Ip $ip): ?Location
     {
         // это уже не просто декоратор, а заместитель, так как мы перехватываем вызов
