@@ -12,7 +12,7 @@ class CacheLocator implements LocatorInterface
     private CacheInterface $cache;
     private string $cachePrefix;
 
-    public function __construct(LocatorInterface $next, CacheInterface $cache, ?string $cachePrefix = 'location-')
+    public function __construct(LocatorInterface $next, CacheInterface $cache, string $cachePrefix = 'location-')
     {
         $this->next = $next;
         $this->cache = $cache;
