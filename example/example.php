@@ -22,21 +22,20 @@ require_once 'DaDataLocator.php';
  * В данном случае мы декорируем вызов "нашего" DaDataLocator'а несколькими другими "локаторами"
  * ChainLocator -> CacheLocator -> MuteLocator -> DaDataLocator
  *
- * Chain локатор в данном примере избыточен, тк уу нас всего один DaDataLocator,
+ * Chain локатор в данном примере избыточен, тк у нас всего один DaDataLocator,
  * такая конфигурация в качестве примера.
  *
  * */
 
-$locator = new ChainLocator(
-    new CacheLocator(
-        new MuteLocator(
-            new DaDataLocator('...'),
-            new PsrLogErrorHandler(new Logger('basic', [new StreamHandler('var/ip-geo-locator.log')]))
-        ),
-        new Psr16Cache(new FilesystemAdapter('cache-locator', 3600, 'var'))
-    )
-);
-$location = $locator->locate(new Ip('46.229.184.75'));
+$errorHandler = new PsrLogErrorHandler(new Logger('basic', [new StreamHandler('var/ip-geo-locator.log')]));
+$cache = new Psr16Cache(new FilesystemAdapter('cache-locator', 3600, 'var'));
+
+$daDataLocator = new DaDataLocator('...');
+$muteLocator = new MuteLocator($daDataLocator, $errorHandler);
+$cacheLocator = new CacheLocator($muteLocator, $cache);
+$chainLocator = new ChainLocator($cacheLocator);
+
+$location = $chainLocator->locate(new Ip('46.229.184.75'));
 var_dump($location);
 
 /*
